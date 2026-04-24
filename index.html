@@ -1,0 +1,2285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xquare — Customer engagement platform for Indonesian restaurants</title>
+<meta name="description" content="From a single outlet to a multi-brand group. xquare is the customer engagement platform for Indonesian restaurants — free to start, enterprise-ready when you grow.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf8f3;
+    --cream-warm: #f1ece0;
+    --cream-sand: #e5dfcf;
+    --ink: #1a1a1a;
+    --ink-soft: #3a3a3a;
+    --ink-quiet: #5a5a5a;
+    --rule: #d4cab0;
+    --accent: #b8472b;
+    --accent-light: #e8a289;
+    --accent-warm: #fff7ee;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  .serif { font-family: 'Playfair Display', Georgia, serif; }
+  .mono {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+  }
+
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  @media (max-width: 640px) { .wrap { padding: 0 20px; } }
+
+  /* ========== NAV ========== */
+  nav.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 18px 32px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(250, 248, 243, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  nav.top.scrolled { border-bottom-color: var(--rule); }
+
+  nav.top .brand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  nav.top .brand .dot { color: var(--accent); }
+
+  nav.top .nav-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  nav.top .nav-links a {
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  nav.top .nav-links a:hover { color: var(--accent); }
+
+  nav.top .cta-nav {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 9px 18px;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.25s ease;
+  }
+
+  nav.top .cta-nav:hover {
+    background: var(--accent);
+    color: var(--cream);
+  }
+
+  @media (max-width: 820px) {
+    nav.top { padding: 14px 20px; }
+    nav.top .nav-links { display: none; }
+  }
+
+  /* ========== HERO ========== */
+  section.hero {
+    min-height: 100vh;
+    padding: 120px 0 80px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background:
+      radial-gradient(ellipse 60% 50% at 85% 20%, rgba(184, 71, 43, 0.06), transparent 70%),
+      radial-gradient(ellipse 80% 60% at 10% 80%, rgba(184, 71, 43, 0.04), transparent 70%),
+      var(--cream);
+    overflow: hidden;
+  }
+
+  section.hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -20%;
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--rule), transparent);
+    transform: rotate(-18deg);
+    opacity: 0.5;
+  }
+
+  .hero-inner { position: relative; z-index: 2; width: 100%; }
+
+  .hero-eyebrow {
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.1s ease forwards;
+  }
+
+  .hero-title {
+    font-size: clamp(44px, 7.5vw, 104px);
+    line-height: 0.95;
+    margin-bottom: 36px;
+    letter-spacing: -0.025em;
+    font-weight: 900;
+    max-width: 15ch;
+  }
+
+  .hero-title .line {
+    display: block;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards;
+  }
+
+  .hero-title .line:nth-child(1) { animation-delay: 0.25s; }
+  .hero-title .line:nth-child(2) { animation-delay: 0.4s; }
+  .hero-title .line:nth-child(3) { animation-delay: 0.55s; }
+
+  .hero-title .accent {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .hero-lede {
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 58ch;
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s ease forwards;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.85s ease forwards;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 18px 34px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.3, 1);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+
+  .btn-primary span, .btn-primary::after {
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-primary::after {
+    content: '→';
+    transition: transform 0.3s ease;
+  }
+
+  .btn-primary:hover::before { transform: translateX(0); }
+  .btn-primary:hover::after { transform: translateX(4px); }
+
+  .btn-ghost {
+    color: var(--ink);
+    padding: 18px 0;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid var(--ink);
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .btn-ghost:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* Free-tier whisper link */
+  .free-whisper {
+    margin-top: 28px;
+    font-size: 13px;
+    color: var(--ink-quiet);
+    opacity: 0;
+    animation: fadeUp 0.8s 1s ease forwards;
+  }
+
+  .free-whisper a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  .free-whisper a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-stats {
+    margin-top: 96px;
+    padding-top: 32px;
+    border-top: 0.5px solid var(--rule);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.15s ease forwards;
+  }
+
+  .hero-stat .figure {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(36px, 4vw, 52px);
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-stat .label {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  .hero-stat .label strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  @media (max-width: 720px) {
+    section.hero { padding: 110px 0 60px; }
+    .hero-stats {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin-top: 64px;
+    }
+  }
+
+  /* ========== SECTION base ========== */
+  section.band {
+    padding: 120px 0;
+    position: relative;
+  }
+
+  section.band-warm { background: var(--cream-warm); }
+  section.band-ink {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  section.band h2.section-title {
+    font-size: clamp(34px, 4.5vw, 58px);
+    max-width: 18ch;
+    margin-bottom: 24px;
+  }
+
+  section.band h2.section-title .accent {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  section.band .section-intro {
+    font-size: clamp(16px, 1.3vw, 18px);
+    color: var(--ink-soft);
+    max-width: 64ch;
+    margin-bottom: 72px;
+  }
+
+  section.band-ink .section-intro { color: #d4cab0; }
+
+  section.band .eyebrow { margin-bottom: 16px; }
+
+  @media (max-width: 720px) {
+    section.band { padding: 80px 0; }
+    section.band .section-intro { margin-bottom: 48px; }
+  }
+
+  /* ========== OUTCOMES ========== */
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 64px;
+  }
+
+  @media (max-width: 820px) {
+    .outcomes-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .outcome {
+    position: relative;
+    padding-left: 24px;
+    border-left: 2px solid var(--accent);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .outcome.in { opacity: 1; transform: translateY(0); }
+
+  .outcome .n {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .outcome h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+
+  .outcome p {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .outcome .ships {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--cream);
+    padding: 3px 9px;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  /* ========== WHY (multi-brand) ========== */
+  .why-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  @media (max-width: 880px) {
+    .why-inner { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .why-inner .why-body {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  .why-inner .why-body p { margin-bottom: 22px; }
+
+  .why-viz {
+    aspect-ratio: 1 / 1;
+    max-width: 440px;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .why-viz svg { width: 100%; height: 100%; }
+
+  /* ========== CUSTOMER INTELLIGENCE ========== */
+  section.ci { padding: 140px 0; }
+
+  .ci-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 80px;
+    align-items: end;
+  }
+
+  @media (max-width: 880px) {
+    .ci-header { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  .ci-header .ships-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--cream);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 6px 14px;
+    border-radius: 2px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .ci-header .copy {
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.65;
+    color: #d4cab0;
+  }
+
+  .ci-segments {
+    display: grid;
+    grid-template-columns: 1fr;
+    counter-reset: seg;
+  }
+
+  .ci-seg {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 40px;
+    padding: 38px 0;
+    border-top: 0.5px solid rgba(212, 202, 176, 0.2);
+    counter-increment: seg;
+    align-items: start;
+  }
+
+  .ci-seg:last-child { border-bottom: 0.5px solid rgba(212, 202, 176, 0.2); }
+
+  .ci-seg::before {
+    content: counter(seg, decimal-leading-zero);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 48px;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .ci-seg .seg-body { max-width: 60ch; }
+
+  .ci-seg h4 {
+    font-size: 26px;
+    margin-bottom: 10px;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+
+  .ci-seg .seg-desc {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #a8a29a;
+  }
+
+  .ci-seg .seg-action {
+    padding-top: 8px;
+    text-align: right;
+    font-size: 12.5px;
+    color: var(--accent-light);
+    font-weight: 500;
+    line-height: 1.5;
+    max-width: 220px;
+  }
+
+  .ci-seg .seg-action .action-tag {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  @media (max-width: 880px) {
+    .ci-seg {
+      grid-template-columns: 60px 1fr;
+      gap: 20px;
+      padding: 0;
+      cursor: pointer;
+      position: relative;
+    }
+
+    /* Header row — always visible */
+    .ci-seg .seg-body {
+      padding: 22px 40px 22px 0;
+    }
+
+    .ci-seg::before { font-size: 28px; padding-top: 22px; }
+
+    .ci-seg h4 {
+      font-size: 18px;
+      margin-bottom: 0;
+      transition: margin-bottom 0.3s ease;
+    }
+
+    /* Chevron */
+    .ci-seg::after {
+      content: '';
+      position: absolute;
+      top: 34px;
+      right: 8px;
+      width: 8px;
+      height: 8px;
+      border-right: 1.5px solid var(--accent-light);
+      border-bottom: 1.5px solid var(--accent-light);
+      transform: rotate(45deg);
+      transition: transform 0.3s ease;
+    }
+
+    .ci-seg.open::after {
+      transform: rotate(-135deg);
+      top: 38px;
+    }
+
+    /* Collapsed: hide desc + action */
+    .ci-seg .seg-desc,
+    .ci-seg .seg-action {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Expanded */
+    .ci-seg.open h4 {
+      margin-bottom: 8px;
+    }
+
+    .ci-seg.open .seg-desc {
+      max-height: 300px;
+      opacity: 1;
+      padding-bottom: 10px;
+    }
+
+    .ci-seg.open .seg-action {
+      max-height: 100px;
+      opacity: 1;
+      grid-column: 2;
+      text-align: left;
+      padding-bottom: 22px;
+      padding-top: 6px;
+      max-width: none;
+    }
+
+    .ci-seg.open .seg-body {
+      padding-bottom: 0;
+    }
+
+    /* Tap affordance */
+    .ci-seg:active {
+      background: rgba(184, 71, 43, 0.05);
+    }
+  }
+
+  .ci-footnote {
+    margin-top: 56px;
+    padding: 24px 28px;
+    background: rgba(250, 248, 243, 0.06);
+    border-left: 2px solid var(--accent);
+    font-size: 14px;
+    line-height: 1.65;
+    color: #d4cab0;
+  }
+
+  .ci-footnote strong {
+    color: var(--cream);
+    font-weight: 600;
+  }
+
+  /* ========== HOW IT WORKS ========== */
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  @media (max-width: 820px) {
+    .how-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  .how-col {
+    padding: 32px 28px;
+    background: var(--cream);
+    border: 0.5px solid var(--rule);
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .how-col .how-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .how-col h3 {
+    font-size: 24px;
+    margin-bottom: 18px;
+    line-height: 1.2;
+  }
+
+  .how-col ul { list-style: none; }
+
+  .how-col li {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    padding: 8px 0 8px 16px;
+    position: relative;
+    border-bottom: 0.5px solid var(--cream-sand);
+  }
+
+  .how-col li:last-child { border-bottom: none; }
+
+  .how-col li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 17px;
+    width: 6px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .how-col li strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ========== PLANS ========== */
+  section.plans {
+    padding: 140px 0;
+    background: var(--cream);
+  }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 80px;
+    border: 0.5px solid var(--rule);
+    border-radius: 3px;
+    background: var(--cream);
+  }
+
+  @media (max-width: 1020px) {
+    .plans-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .plans-grid { grid-template-columns: 1fr; }
+  }
+
+  .plan {
+    padding: 32px 24px 28px;
+    border-right: 0.5px solid var(--rule);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .plan:last-child { border-right: none; }
+
+  @media (max-width: 1020px) {
+    .plan:nth-child(2) { border-right: none; }
+    .plan:nth-child(1), .plan:nth-child(2) { border-bottom: 0.5px solid var(--rule); }
+    .plan:nth-child(3) { border-right: 0.5px solid var(--rule); }
+  }
+
+  @media (max-width: 640px) {
+    .plan { border-right: none !important; border-bottom: 0.5px solid var(--rule); }
+    .plan:last-child { border-bottom: none; }
+  }
+
+  .plan-featured {
+    background: var(--ink);
+    color: var(--cream);
+    position: relative;
+    border: none;
+    margin: -1px;
+  }
+
+  .plan.plan-featured .plan-label,
+  .plan.plan-featured h3 {
+    color: var(--cream);
+  }
+
+  .plan.plan-featured .plan-taxrate { color: #d4cab0; }
+  .plan.plan-featured .plan-taxrate strong { color: var(--cream); }
+  .plan.plan-featured .plan-rupiah { color: var(--accent-light); }
+  .plan.plan-featured .plan-tagline { color: #d4cab0; }
+  .plan.plan-featured .plan-price-note { color: #a8a29a; }
+  .plan.plan-featured .plan-features li { color: #d4cab0; border-bottom-color: rgba(212, 202, 176, 0.15); }
+  .plan.plan-featured .plan-features li strong { color: var(--cream); }
+  .plan.plan-featured .plan-features li.pri-feature { color: var(--cream); }
+  .plan.plan-featured .plan-pricing { border-color: rgba(212, 202, 176, 0.15); }
+  .plan.plan-featured .plan-cta {
+    background: var(--accent);
+    color: var(--cream);
+  }
+  .plan.plan-featured .plan-cta:hover {
+    background: var(--cream);
+    color: var(--ink);
+  }
+
+  .plan .most-popular {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--accent);
+    color: var(--cream);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .plan .plan-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .plan h3 {
+    font-size: 26px;
+    margin-bottom: 6px;
+    line-height: 1.1;
+  }
+
+  .plan .plan-tagline {
+    font-size: 13px;
+    color: var(--ink-quiet);
+    font-style: italic;
+    margin-bottom: 20px;
+    min-height: 32px;
+  }
+
+  .plan .plan-pricing {
+    padding: 16px 0;
+    margin-bottom: 20px;
+    border-top: 0.5px solid var(--cream-sand);
+    border-bottom: 0.5px solid var(--cream-sand);
+  }
+
+  .plan .plan-rupiah {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--accent);
+    line-height: 1.1;
+    margin-bottom: 3px;
+    letter-spacing: -0.01em;
+  }
+
+  .plan .plan-taxrate {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  .plan .plan-taxrate strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .plan .plan-price-note {
+    font-size: 11px;
+    color: var(--ink-quiet);
+    margin-top: 6px;
+    line-height: 1.4;
+    font-style: italic;
+  }
+
+  .plan-features {
+    list-style: none;
+    margin-bottom: 24px;
+    flex-grow: 1;
+  }
+
+  .plan-features li {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    padding: 8px 0 8px 18px;
+    position: relative;
+    border-bottom: 0.5px solid var(--cream-sand);
+  }
+
+  .plan-features li:last-child { border-bottom: none; }
+
+  .plan-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15px;
+    width: 6px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .plan-features li strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .plan-features li.pri-feature {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .plan-features li.pri-feature::before {
+    background: var(--accent);
+    top: 15px;
+    width: 8px;
+    height: 2px;
+  }
+
+  .plan-cta {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--cream);
+    text-align: center;
+    padding: 13px 16px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    margin-top: auto;
+  }
+
+  .plan-cta:hover {
+    background: var(--accent);
+    color: var(--cream);
+  }
+
+  .plans-footer {
+    margin-top: 40px;
+    padding: 20px 24px;
+    background: var(--cream-warm);
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .plans-footer strong { color: var(--ink); font-weight: 600; }
+
+  .plans-footer a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  .plans-footer a:hover { border-bottom-color: var(--accent); }
+
+  /* ========== KOL BRIEF ========== */
+  section.kol-brief {
+    padding: 110px 0;
+    background: var(--cream-warm);
+    position: relative;
+  }
+
+  .kol-brief-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  @media (max-width: 880px) {
+    .kol-brief-inner { grid-template-columns: 1fr; gap: 40px; }
+    section.kol-brief { padding: 80px 0; }
+  }
+
+  .kol-brief h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.08;
+    margin-bottom: 20px;
+    max-width: 15ch;
+  }
+
+  .kol-brief h2 .accent {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .kol-brief .intro {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    max-width: 50ch;
+  }
+
+  .kol-brief .link-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    transition: gap 0.3s ease;
+  }
+
+  .kol-brief .link-more:hover { gap: 14px; }
+
+  .kol-modes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  @media (max-width: 520px) {
+    .kol-modes { grid-template-columns: 1fr; }
+  }
+
+  .kol-mode {
+    padding: 18px 20px;
+    background: var(--cream);
+    border-radius: 3px;
+    border-top: 2px solid var(--accent);
+    position: relative;
+  }
+
+  .kol-mode .mode-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .kol-mode h4 {
+    font-size: 16px;
+    margin-bottom: 6px;
+    line-height: 1.25;
+  }
+
+  .kol-mode p {
+    font-size: 13px;
+    color: var(--ink-quiet);
+    line-height: 1.5;
+  }
+
+  /* ========== SIGNUP ========== */
+  section.signup {
+    padding: 140px 0;
+    background: var(--ink);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  section.signup::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(ellipse at top right, rgba(184, 71, 43, 0.15), transparent 70%);
+    pointer-events: none;
+  }
+
+  .signup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 880px) {
+    .signup-grid { grid-template-columns: 1fr; gap: 48px; }
+    section.signup { padding: 96px 0; }
+  }
+
+  .signup-copy h2 {
+    font-size: clamp(38px, 5vw, 64px);
+    margin-bottom: 24px;
+    line-height: 1.05;
+    color: var(--cream);
+  }
+
+  .signup-copy h2 .accent {
+    color: var(--accent-light);
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .signup-copy p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: #d4cab0;
+    margin-bottom: 20px;
+    max-width: 44ch;
+  }
+
+  .signup-meta {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 0.5px solid rgba(212, 202, 176, 0.2);
+    font-size: 13px;
+    color: #a8a29a;
+    line-height: 1.7;
+  }
+
+  .signup-meta strong {
+    color: var(--cream);
+    font-weight: 600;
+  }
+
+  .signup-form {
+    background: rgba(250, 248, 243, 0.04);
+    padding: 40px 36px;
+    border: 0.5px solid rgba(212, 202, 176, 0.25);
+    border-radius: 3px;
+  }
+
+  .step {
+    display: none;
+  }
+
+  .step.active { display: block; animation: stepIn 0.4s ease; }
+
+  @keyframes stepIn {
+    from { opacity: 0; transform: translateX(12px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .step-progress {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 28px;
+  }
+
+  .step-progress .dot {
+    height: 3px;
+    flex: 1;
+    background: rgba(212, 202, 176, 0.2);
+    border-radius: 2px;
+    transition: background 0.3s ease;
+  }
+
+  .step-progress .dot.active { background: var(--accent); }
+
+  .step-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--cream);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .step-sub {
+    font-size: 14px;
+    color: #a8a29a;
+    margin-bottom: 24px;
+    line-height: 1.55;
+  }
+
+  .tier-choices {
+    display: grid;
+    gap: 10px;
+  }
+
+  .tier-choice {
+    background: transparent;
+    border: 0.5px solid rgba(212, 202, 176, 0.2);
+    padding: 16px 18px;
+    text-align: left;
+    color: var(--cream);
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    border-radius: 2px;
+    transition: all 0.25s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .tier-choice:hover {
+    border-color: var(--accent-light);
+    background: rgba(184, 71, 43, 0.08);
+  }
+
+  .tier-choice .choice-main {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .tier-choice .choice-sub {
+    font-size: 12px;
+    color: #a8a29a;
+    line-height: 1.4;
+  }
+
+  .tier-choice .choice-tier-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    font-weight: 600;
+    flex-shrink: 0;
+    padding: 3px 7px;
+    border: 0.5px solid var(--accent-light);
+    border-radius: 2px;
+  }
+
+  .tier-picked {
+    background: rgba(184, 71, 43, 0.15);
+    border: 0.5px solid var(--accent-light);
+    padding: 14px 18px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .tier-picked .picked-label {
+    font-size: 12px;
+    color: #d4cab0;
+  }
+
+  .tier-picked .picked-tier {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    font-weight: 600;
+  }
+
+  .tier-picked button.change {
+    background: transparent;
+    border: none;
+    color: var(--accent-light);
+    font-size: 11px;
+    cursor: pointer;
+    text-decoration: underline;
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+  }
+
+  .signup-form .form-label-group {
+    margin-bottom: 18px;
+  }
+
+  .signup-form label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .signup-form input,
+  .signup-form textarea,
+  .signup-form select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 0.5px solid rgba(212, 202, 176, 0.35);
+    padding: 10px 0;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    color: var(--cream);
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .signup-form input::placeholder,
+  .signup-form textarea::placeholder {
+    color: rgba(212, 202, 176, 0.4);
+  }
+
+  .signup-form input:focus,
+  .signup-form textarea:focus,
+  .signup-form select:focus {
+    border-bottom-color: var(--accent-light);
+  }
+
+  .signup-form textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+
+  .signup-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 480px) {
+    .signup-form .form-row { grid-template-columns: 1fr; }
+  }
+
+  .signup-form .step-btns {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .signup-form button.primary {
+    flex: 1;
+    background: var(--accent);
+    color: var(--cream);
+    border: none;
+    padding: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-radius: 2px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .signup-form button.primary:hover {
+    background: var(--cream);
+    color: var(--ink);
+  }
+
+  .signup-form button.secondary {
+    background: transparent;
+    color: #d4cab0;
+    border: 0.5px solid rgba(212, 202, 176, 0.3);
+    padding: 16px 20px;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .signup-form button.secondary:hover {
+    border-color: var(--cream);
+    color: var(--cream);
+  }
+
+  .form-success {
+    padding: 40px 0;
+    text-align: center;
+  }
+
+  .form-success .check {
+    width: 56px;
+    height: 56px;
+    border: 1.5px solid var(--accent-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: var(--accent-light);
+    font-size: 28px;
+  }
+
+  .form-success h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: var(--cream);
+  }
+
+  .form-success p {
+    font-size: 14px;
+    color: #d4cab0;
+    max-width: 34ch;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    padding: 48px 0 40px;
+    background: var(--cream);
+    border-top: 0.5px solid var(--rule);
+  }
+
+  footer .foot-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 720px) {
+    footer .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+
+  footer .foot-brand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: var(--ink);
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+
+  footer .foot-brand .dot { color: var(--accent); }
+
+  footer .foot-tag {
+    font-size: 13px;
+    color: var(--ink-quiet);
+    line-height: 1.55;
+    max-width: 28ch;
+  }
+
+  footer h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+
+  footer ul { list-style: none; }
+
+  footer li { font-size: 13px; margin-bottom: 8px; }
+
+  footer li a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  footer li a:hover { color: var(--accent); }
+
+  footer .foot-base {
+    padding-top: 28px;
+    border-top: 0.5px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--ink-quiet);
+  }
+
+  @media (max-width: 520px) {
+    footer .foot-base { flex-direction: column; gap: 6px; }
+  }
+
+  /* Sticky CTA */
+  .sticky-cta {
+    display: none;
+  }
+
+  @media (max-width: 820px) {
+    .sticky-cta {
+      display: flex;
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      z-index: 99;
+      background: var(--accent);
+      color: var(--cream);
+      padding: 15px;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 2px;
+      box-shadow: 0 8px 24px rgba(26, 26, 26, 0.18);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .sticky-cta.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Reveal animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.3, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal-stagger.in > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-stagger.in > *:nth-child(1) { transition-delay: 0.05s; }
+  .reveal-stagger.in > *:nth-child(2) { transition-delay: 0.15s; }
+  .reveal-stagger.in > *:nth-child(3) { transition-delay: 0.25s; }
+  .reveal-stagger.in > *:nth-child(4) { transition-delay: 0.35s; }
+  .reveal-stagger.in > *:nth-child(5) { transition-delay: 0.45s; }
+  .reveal-stagger.in > *:nth-child(6) { transition-delay: 0.55s; }
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="top" id="topnav">
+  <a href="/" class="brand">xquare<span class="dot">.</span></a>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#intelligence">Customer Intelligence</a>
+    <a href="#plans">Plans</a>
+    <a href="/kol">KOL program</a>
+  </div>
+  <a href="#signup" class="cta-nav">Get started</a>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-eyebrow mono">Customer engagement platform for restaurants</div>
+      <h1 class="hero-title">
+        <span class="line">Every restaurant.</span>
+        <span class="line"><span class="accent">Every guest.</span></span>
+        <span class="line">One platform.</span>
+      </h1>
+      <p class="hero-lede">
+        From a single outlet to a multi-brand group — xquare is the customer engagement platform for Indonesian restaurants. Vouchers, bookings with deposit, whitelabelled apps, customer intelligence, affiliate programs. Start free. Grow into enterprise.
+      </p>
+      <div class="hero-ctas">
+        <a href="#signup" class="btn-primary"><span>Get started free</span></a>
+        <a href="#plans" class="btn-ghost">Compare plans</a>
+      </div>
+
+      <div class="free-whisper">
+        Serious operator? <a href="#intelligence">Jump to Customer Intelligence</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="figure">4</div>
+          <div class="label"><strong>tiers</strong> — from free listing with vouchers to enterprise-grade multi-brand platform. You grow into the next one when it earns its place.</div>
+        </div>
+        <div class="hero-stat">
+          <div class="figure">∞</div>
+          <div class="label"><strong>whitelabelled PWAs</strong> on paid tiers — each brand keeps its own identity and domain. Your brand, not xquare's.</div>
+        </div>
+        <div class="hero-stat">
+          <div class="figure">0</div>
+          <div class="label"><strong>App Store builds.</strong> No Apple or Google fees. Installs straight from the browser.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHAT CHANGES ========== -->
+<section class="band" id="what-changes">
+  <div class="wrap">
+    <div class="mono eyebrow reveal">Outcomes</div>
+    <h2 class="section-title serif reveal">What changes when <span class="accent">xquare is live.</span></h2>
+    <p class="section-intro reveal">
+      Four measurable shifts an operator notices in the first ninety days. Each one was built because one of our pilot restaurants asked for it — not because it looks good in a pitch.
+    </p>
+
+    <div class="outcomes-grid reveal-stagger">
+      <div class="outcome">
+        <div class="n">01</div>
+        <h3>Repeat revenue you weren't capturing.</h3>
+        <p>Every guest leaves with a voucher for their next visit, valid 30 days. Typical redemption rates run 20–30%. Available on every tier, including Free.</p>
+      </div>
+      <div class="outcome">
+        <div class="n">02</div>
+        <h3>No-shows drop on peak nights.</h3>
+        <p>Deposit-protected bookings push attendance above 95% for confirmed reservations. One saved 4-top on a Saturday covers a month on Pro or Business.</p>
+      </div>
+      <div class="outcome">
+        <div class="n">03</div>
+        <h3>Your next brand launch costs nothing in acquisition.</h3>
+        <p>Multi-brand operators: every existing customer already has the xquare app. New concepts get launch-day traffic from your own audience — alongside xquare customers whose preferences match.</p>
+      </div>
+      <div class="outcome">
+        <div class="n">04</div>
+        <h3>You finally see the customer, not the transactions.</h3>
+        <p>Auto-promote cross-brand loyalists to VIP. Win back lapsed regulars. Nudge single-brand customers toward your other concepts.<br><span class="ships">Ships in 2 weeks · Business & Enterprise</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHY MULTI-BRAND ========== -->
+<section class="band band-warm">
+  <div class="wrap">
+    <div class="mono eyebrow reveal">For groups who need more than one dashboard</div>
+    <div class="why-inner">
+      <div class="reveal">
+        <h2 class="serif" style="font-size: clamp(32px, 4vw, 50px); margin-bottom: 24px; line-height: 1.1;">
+          Running multiple brands, <span style="font-style: italic; color: var(--accent);">many outlets,</span> one group.
+        </h2>
+        <div class="why-body">
+          <p>Separate booking systems per brand. POS reconciliation multiplied across every outlet. Marketing lists that don't cross brands. Customer data scattered everywhere.</p>
+          <p>xquare collapses that overhead into one dashboard with granular role-based access — owner, manager, staff, team — scoped per brand, per outlet, down to the team member. Your outlet managers see their outlet. Your regional managers see their cluster. You see everything.</p>
+          <p>And every customer who engages with any of your brands becomes part of one unified profile. Finally, the cross-brand discovery you could never engineer any other way.</p>
+        </div>
+      </div>
+
+      <div class="why-viz reveal">
+        <svg viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="220" cy="220" r="210" stroke="#d4cab0" stroke-width="0.5" stroke-dasharray="2 4" opacity="0.6"/>
+          <circle cx="220" cy="220" r="140" stroke="#d4cab0" stroke-width="0.5" opacity="0.4"/>
+          <circle cx="220" cy="220" r="70" stroke="#d4cab0" stroke-width="0.5" opacity="0.5"/>
+          <g stroke="#b8472b" stroke-width="0.7" opacity="0.4">
+            <line x1="220" y1="220" x2="220" y2="60"/>
+            <line x1="220" y1="220" x2="360" y2="110"/>
+            <line x1="220" y1="220" x2="390" y2="220"/>
+            <line x1="220" y1="220" x2="360" y2="330"/>
+            <line x1="220" y1="220" x2="220" y2="380"/>
+            <line x1="220" y1="220" x2="80" y2="330"/>
+            <line x1="220" y1="220" x2="50" y2="220"/>
+            <line x1="220" y1="220" x2="80" y2="110"/>
+          </g>
+          <g>
+            <circle cx="220" cy="60" r="6" fill="#b8472b"/>
+            <circle cx="360" cy="110" r="6" fill="#b8472b"/>
+            <circle cx="390" cy="220" r="6" fill="#b8472b"/>
+            <circle cx="360" cy="330" r="6" fill="#b8472b"/>
+            <circle cx="220" cy="380" r="6" fill="#b8472b"/>
+            <circle cx="80" cy="330" r="6" fill="#b8472b"/>
+            <circle cx="50" cy="220" r="6" fill="#b8472b"/>
+            <circle cx="80" cy="110" r="6" fill="#b8472b"/>
+          </g>
+          <g>
+            <circle cx="220" cy="150" r="4" fill="#1a1a1a"/>
+            <circle cx="290" cy="220" r="4" fill="#1a1a1a"/>
+            <circle cx="220" cy="290" r="4" fill="#1a1a1a"/>
+            <circle cx="150" cy="220" r="4" fill="#1a1a1a"/>
+          </g>
+          <circle cx="220" cy="220" r="22" fill="#1a1a1a"/>
+          <circle cx="220" cy="220" r="28" stroke="#1a1a1a" stroke-width="1" fill="none" opacity="0.3"/>
+          <text x="220" y="225" text-anchor="middle" fill="#faf8f3" font-family="Playfair Display, Georgia, serif" font-size="13" font-weight="700" font-style="italic">xq</text>
+          <g font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="0.1em" fill="#5a5a5a">
+            <text x="220" y="40" text-anchor="middle">BRAND</text>
+            <text x="360" y="95" text-anchor="middle">BRAND</text>
+            <text x="410" y="224" text-anchor="start">BRAND</text>
+            <text x="360" y="348" text-anchor="middle">BRAND</text>
+            <text x="220" y="402" text-anchor="middle">BRAND</text>
+            <text x="80" y="348" text-anchor="middle">BRAND</text>
+            <text x="30" y="224" text-anchor="end">BRAND</text>
+            <text x="80" y="95" text-anchor="middle">BRAND</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CUSTOMER INTELLIGENCE ========== -->
+<section class="band band-ink ci" id="intelligence">
+  <div class="wrap">
+    <div class="ci-header">
+      <div class="reveal">
+        <span class="ships-tag">Ships in 2 weeks · Business & Enterprise</span>
+        <h2 class="section-title serif" style="color: var(--cream);">Your customers, <span class="accent">finally seen.</span></h2>
+      </div>
+      <div class="copy reveal">
+        <p>Your outlets generate thousands of customer interactions every day — bookings, orders, voucher redemptions, check-ins. xquare unifies every interaction into one profile per customer across your entire group, then automatically segments them into operationally useful groups — each paired with a one-click action.</p>
+        <p style="margin-top: 16px;">Not another dashboard to interpret. Segments your team can act on tonight.</p>
+      </div>
+    </div>
+
+    <div class="ci-segments reveal-stagger">
+      <div class="ci-seg">
+        <div class="seg-body">
+          <h4>Cross-brand loyalists</h4>
+          <p class="seg-desc">Customers with xquare interactions at 2+ of your brands in the last 90 days. For a multi-brand group, this is the segment that makes the whole platform pay for itself — these are your highest-value regulars and today they're invisible.</p>
+        </div>
+        <div class="seg-action">
+          <span class="action-tag">One-click</span>
+          Auto-promote to VIP · group-wide thank-you voucher
+        </div>
+      </div>
+
+      <div class="ci-seg">
+        <div class="seg-body">
+          <h4>Lapsed engagement</h4>
+          <p class="seg-desc">3+ xquare interactions historically, nothing in the last 90 days. These customers haven't churned — they've just drifted. Highest-ROI voucher segment in F&B.</p>
+        </div>
+        <div class="seg-action">
+          <span class="action-tag">One-click</span>
+          Win-back voucher targeted to their most-visited brand
+        </div>
+      </div>
+
+      <div class="ci-seg">
+        <div class="seg-body">
+          <h4>Single-brand regulars ripe for cross-sell</h4>
+          <p class="seg-desc">10+ interactions at Brand A, zero at Brand B — where the two share cuisine cluster or neighbourhood. The segment that turns "multi-brand" from a claim into measurable cross-sell revenue.</p>
+        </div>
+        <div class="seg-action">
+          <span class="action-tag">One-click</span>
+          Introduction voucher for the new brand, valid 30 days
+        </div>
+      </div>
+
+      <div class="ci-seg">
+        <div class="seg-body">
+          <h4>First-time bookers worth retaining</h4>
+          <p class="seg-desc">Their first booking or voucher came through a premium context — peak weekend slot, special event, large party. These customers convert to regulars at a much higher rate if touched in the first week.</p>
+        </div>
+        <div class="seg-action">
+          <span class="action-tag">One-click</span>
+          Personalised follow-up from the brand manager, within 7 days
+        </div>
+      </div>
+
+      <div class="ci-seg">
+        <div class="seg-body">
+          <h4>Birthday &amp; anniversary triggers</h4>
+          <p class="seg-desc">Known from profile. Basic, but nobody in Indonesian F&B does it well — and it's the segment with the highest emotional resonance per rupiah spent.</p>
+        </div>
+        <div class="seg-action">
+          <span class="action-tag">One-click</span>
+          Voucher auto-delivered a week before, valid at their most-visited brand
+        </div>
+      </div>
+    </div>
+
+    <div class="ci-footnote reveal">
+      <strong>Deepens with POS integration.</strong> Once MokaPOS partnership is live (or your preferred POS is integrated), Customer Intelligence unlocks spend-based segmentation: high-LTV identification, lapsed spenders by revenue, average-ticket trends. The segments above become more surgical; the infrastructure stays the same.
+    </div>
+  </div>
+</section>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section class="band" id="how">
+  <div class="wrap">
+    <div class="mono eyebrow reveal">The architecture</div>
+    <h2 class="section-title serif reveal">One platform, <span class="accent">three surfaces.</span></h2>
+    <p class="section-intro reveal">Everything your customers see. Everything your team runs. Everything you control.</p>
+
+    <div class="how-grid reveal-stagger">
+      <div class="how-col">
+        <div class="how-label">Your customer</div>
+        <h3>Installs once, finds you anywhere.</h3>
+        <ul>
+          <li><strong>Whitelabelled PWA</strong> per brand — installs to home screen, no App Store.</li>
+          <li><strong>The xquare app</strong> — every brand you operate, in one place.</li>
+          <li><strong>Booking with deposit</strong> — waived for members.</li>
+          <li><strong>Vouchers for next visit</strong> — earned automatically, 30-day expiry.</li>
+          <li><strong>Membership tiers</strong> — per-brand or group-wide benefits.</li>
+          <li><strong>Direct chat</strong> with your team. No more Instagram DMs.</li>
+          <li><strong>Instant notifications.</strong> Confirmations, reminders, voucher drops.</li>
+        </ul>
+      </div>
+
+      <div class="how-col">
+        <div class="how-label">Your team</div>
+        <h3>One dashboard, every brand, every outlet.</h3>
+        <ul>
+          <li><strong>Multi-brand, multi-outlet scoping.</strong> Filter by brand, outlet, time, role.</li>
+          <li><strong>Granular access:</strong> Owner, Manager, Staff, Team — scoped per outlet.</li>
+          <li><strong>Bookings merged.</strong> Walk-ins, calls, and app bookings in one view.</li>
+          <li><strong>QR check-in</strong> from any phone. No extra hardware.</li>
+          <li><strong>MokaPOS reconciliation</strong> today; full sync on partnership.</li>
+          <li><strong>Voucher redemptions</strong> record instantly as payment. No gap.</li>
+        </ul>
+      </div>
+
+      <div class="how-col">
+        <div class="how-label">Your control</div>
+        <h3>Your brand, your money, your data.</h3>
+        <ul>
+          <li><strong>Customer Intelligence.</strong> One view across brands. <em style="color: var(--accent); font-style: normal; font-weight: 600;">Business+</em></li>
+          <li><strong>Instant PWA.</strong> Ready when your menu and photos are uploaded.</li>
+          <li><strong>Subdomain on Pro; your domain on Business+.</strong></li>
+          <li><strong>Affiliate / KOL program.</strong> You set the rate — flat, tiered, per-product, or per-affiliate. Commissions auto-split on settlement; affiliates self-withdraw.</li>
+          <li><strong>Campaigns.</strong> Push per brand, per outlet, or group-wide.</li>
+          <li><strong>Your managed payment account</strong> from Business up. Sales flow directly to you via a licensed Indonesian payment gateway — xquare never holds your cash.</li>
+          <li><strong>Accepts QRIS, OVO, GoPay, DANA, ShopeePay, bank transfer.</strong> Credit card unlocks on approval for Business &amp; Enterprise.</li>
+          <li><strong>Data exports any time.</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PLANS ========== -->
+<section class="plans" id="plans">
+  <div class="wrap">
+    <div class="mono eyebrow reveal">Plans</div>
+    <h2 class="section-title serif reveal">Start where you are. <span class="accent">Grow into the next tier</span> when it earns its place.</h2>
+    <p class="section-intro reveal" style="max-width: 68ch;">
+      Free to begin, enterprise-ready when you're there. Pro and Business include a 1-month free trial at Free-tier transaction rates &mdash; feel the platform before you pay for it. Business and Enterprise offer a revenue-share alternative to the fixed monthly.
+    </p>
+
+    <div class="plans-grid reveal">
+
+      <!-- FREE -->
+      <div class="plan">
+        <div class="plan-label">Free</div>
+        <h3>Get listed</h3>
+        <div class="plan-tagline">Basic listing, vouchers, one user. For single outlets testing the waters.</div>
+        <div class="plan-pricing">
+          <div class="plan-rupiah">Rp 0<span style="font-size:13px;color:var(--ink-quiet);font-weight:500;"> / month</span></div>
+          <div class="plan-taxrate"><strong>8%</strong> on transactions</div>
+          <div class="plan-price-note">Plus affiliate commission you choose to run</div>
+        </div>
+        <ul class="plan-features">
+          <li class="pri-feature">Listed in the xquare app</li>
+          <li>Vouchers for next visit</li>
+          <li>1 user</li>
+          <li>1 outlet, 1 brand</li>
+          <li>Customer chat</li>
+          <li>Affiliate / KOL program</li>
+          <li>QRIS, OVO, GoPay, DANA, ShopeePay, bank transfer</li>
+          <li style="color: var(--ink-quiet);">No online booking</li>
+          <li style="color: var(--ink-quiet);">No whitelabelled PWA</li>
+        </ul>
+        <a href="#signup" class="plan-cta">Get started free</a>
+      </div>
+
+      <!-- PRO -->
+      <div class="plan">
+        <div class="plan-label">Pro</div>
+        <h3>Take bookings</h3>
+        <div class="plan-tagline">Whitelabelled PWA, online bookings, small team. Growing single-outlet operators.</div>
+        <div class="plan-pricing">
+          <div class="plan-rupiah">Rp 1 juta<span style="font-size:13px;color:var(--ink-quiet);font-weight:500;"> / month</span></div>
+          <div class="plan-taxrate"><strong>5%</strong> on transactions</div>
+          <div class="plan-price-note">1-month free trial at Free-tier transaction rates</div>
+        </div>
+        <ul class="plan-features">
+          <li class="pri-feature">Everything in Free</li>
+          <li><strong>Whitelabelled PWA</strong> on xquare subdomain</li>
+          <li><strong>Bookings with deposit</strong></li>
+          <li>5 users &mdash; owner, manager, staff, team</li>
+          <li>Up to 5 outlets &middot; 1 brand</li>
+          <li>Campaign dashboard</li>
+          <li>Affiliate / KOL program <a href="/kol" style="color: var(--accent); text-decoration: none; font-size: 11px; font-weight: 500; border-bottom: 1px solid var(--accent);">Learn more</a></li>
+          <li>QRIS, OVO, GoPay, DANA, ShopeePay, bank transfer</li>
+        </ul>
+        <a href="#signup" class="plan-cta">Start Pro free for 1 month</a>
+      </div>
+
+      <!-- BUSINESS (FEATURED) -->
+      <div class="plan plan-featured">
+        <span class="most-popular">Best value</span>
+        <div class="plan-label">Business</div>
+        <h3>Multi-brand operators</h3>
+        <div class="plan-tagline">Your domain. Customer Intelligence. Your managed payment account. Membership.</div>
+        <div class="plan-pricing">
+          <div class="plan-rupiah">Rp 3 juta<span style="font-size:13px;color:#a8a29a;font-weight:500;"> / month</span></div>
+          <div class="plan-taxrate"><strong>5%</strong> on transactions</div>
+          <div class="plan-price-note">Revenue-share alternative available &middot; 1-month free trial</div>
+        </div>
+        <ul class="plan-features">
+          <li class="pri-feature">Everything in Pro</li>
+          <li><strong>Customer Intelligence</strong> &mdash; 5 built-in segments</li>
+          <li><strong>Your subdomain</strong> (booking.yourbrand.co.id)</li>
+          <li><strong>Your managed payment account</strong> &mdash; sales settle directly to you</li>
+          <li><strong>Membership</strong> &mdash; group-wide across your brands</li>
+          <li>10 users + team roles</li>
+          <li>Up to 20 outlets &middot; 2 brands</li>
+          <li>Credit card on approval (plus all Pro methods)</li>
+          <li>Affiliate / KOL program <a href="/kol" style="color: var(--accent-light); text-decoration: none; font-size: 11px; font-weight: 500; border-bottom: 1px solid var(--accent-light);">Learn more</a></li>
+        </ul>
+        <a href="#signup" class="plan-cta">Try Business free for 1 month</a>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="plan">
+        <div class="plan-label">Enterprise</div>
+        <h3>Groups at scale</h3>
+        <div class="plan-tagline">Your own domain per brand, custom segments, dedicated support. 3+ brands or 21+ outlets.</div>
+        <div class="plan-pricing">
+          <div class="plan-rupiah">On request</div>
+          <div class="plan-taxrate">Priced to your volume</div>
+          <div class="plan-price-note">Revenue-share alternative available &middot; try features on Business first</div>
+        </div>
+        <ul class="plan-features">
+          <li class="pri-feature">Everything in Business</li>
+          <li><strong>Your own domain</strong> per brand</li>
+          <li><strong>3+ brands</strong> &mdash; negotiated above</li>
+          <li><strong>Unlimited outlets</strong> and users</li>
+          <li><strong>Custom segments</strong> co-designed with your team</li>
+          <li><strong>Membership</strong> &mdash; per-brand or group-wide, your choice</li>
+          <li>Dedicated success manager</li>
+          <li>Quarterly strategic review</li>
+        </ul>
+        <a href="#signup" class="plan-cta">Book a demo</a>
+      </div>
+
+    </div>
+
+    <div class="plans-footer reveal">
+      <div>
+        <strong>Pro and Business</strong> come with a 1-month free trial &mdash; pay nothing monthly, just Free-tier transaction rates, while you see how it performs. <strong>Revenue-share</strong> is an alternative to the fixed monthly on Business and Enterprise &mdash; pay only as xquare drives attributable revenue. Payments processed by a licensed Indonesian payment gateway (OJK/BI-compliant).
+      </div>
+      <a href="#signup">Not sure which plan? &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== KOL BRIEF ========== -->
+<section class="kol-brief" id="kol-brief">
+  <div class="wrap">
+    <div class="kol-brief-inner">
+      <div class="reveal">
+        <div class="mono eyebrow" style="margin-bottom: 14px;">Affiliate / KOL program</div>
+        <h2 class="serif">KOLs and regulars earn <span class="accent">alongside you.</span></h2>
+        <p class="intro">
+          Every paid tier includes an affiliate program &mdash; run it with KOLs, industry partners, or your own best customers. You decide the commission model, the rate, and who qualifies. Commissions auto-split on settlement into affiliate wallets; they self-withdraw. Zero admin for your team, zero chasing for them.
+        </p>
+        <a href="/kol" class="link-more">Learn more about the KOL program <span>&rarr;</span></a>
+      </div>
+
+      <div class="kol-modes reveal-stagger">
+        <div class="kol-mode">
+          <div class="mode-label">Flat rate</div>
+          <h4>One rate, every affiliate.</h4>
+          <p>Simplest way to launch. Every affiliate earns the same percentage on every booking they send.</p>
+        </div>
+        <div class="kol-mode">
+          <div class="mode-label">Tiered rates</div>
+          <h4>Reward volume.</h4>
+          <p>Top performers earn a higher rate. Affiliates who drive more bookings unlock better commissions.</p>
+        </div>
+        <div class="kol-mode">
+          <div class="mode-label">Per product</div>
+          <h4>Different rates for different items.</h4>
+          <p>Set a higher commission on premium menus or high-margin packages. Each product can carry its own rate.</p>
+        </div>
+        <div class="kol-mode">
+          <div class="mode-label">Per affiliate</div>
+          <h4>Custom terms.</h4>
+          <p>Negotiate individually with high-profile partners. Set bespoke rates per KOL when it matters.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SIGNUP (CASCADING) ========== -->
+<section class="signup" id="signup">
+  <div class="wrap">
+    <div class="signup-grid">
+
+      <div class="signup-copy">
+        <div class="mono eyebrow" style="color: var(--accent-light); margin-bottom: 20px;">Get started</div>
+        <h2 class="serif">Tell us about your <span class="accent">restaurant.</span></h2>
+        <p>Two-minute form. We'll recommend the right plan, configure your setup, and get you live.</p>
+        <p><strong style="color: var(--cream);">Free and Pro</strong> are set up immediately. <strong style="color: var(--cream);">Business</strong> gets a proper onboarding call. <strong style="color: var(--cream);">Enterprise</strong> opens with a demo on your flagship brand.</p>
+
+        <div class="signup-meta">
+          <p><strong>What happens next.</strong> Free: instant setup link on WhatsApp. Pro: instant setup with 1-month free trial. Business: onboarding call within 24 hours, 1-month free trial once live. Enterprise: 30-minute demo on your live brand before anything else.</p>
+        </div>
+      </div>
+
+      <form class="signup-form" id="vendorForm" onsubmit="return false">
+
+        <div class="step-progress">
+          <div class="dot active" id="dot1"></div>
+          <div class="dot" id="dot2"></div>
+          <div class="dot" id="dot3"></div>
+        </div>
+
+        <!-- STEP 1: Operator type -->
+        <div class="step active" id="step1">
+          <div class="step-title">What best describes your business?</div>
+          <div class="step-sub">We'll recommend the right plan. You can change it at any point.</div>
+
+          <div class="tier-choices">
+            <button type="button" class="tier-choice" onclick="selectTier('free', 'Single outlet · just getting listed')">
+              <div>
+                <div class="choice-main">Single outlet, just getting listed</div>
+                <div class="choice-sub">Vouchers, basic listing, no online booking yet</div>
+              </div>
+              <div class="choice-tier-tag">Free</div>
+            </button>
+            <button type="button" class="tier-choice" onclick="selectTier('pro', 'Single outlet with online booking')">
+              <div>
+                <div class="choice-main">Single outlet with online booking</div>
+                <div class="choice-sub">Up to 5 outlets, 1 brand, 5-person team &middot; 1-month free trial</div>
+              </div>
+              <div class="choice-tier-tag">Pro</div>
+            </button>
+            <button type="button" class="tier-choice" onclick="selectTier('business', 'Multi-brand operator')">
+              <div>
+                <div class="choice-main">Multi-brand operator</div>
+                <div class="choice-sub">Up to 2 brands, up to 20 outlets, team of 10 &middot; 1-month free trial</div>
+              </div>
+              <div class="choice-tier-tag">Business</div>
+            </button>
+            <button type="button" class="tier-choice" onclick="selectTier('enterprise', 'Large restaurant group')">
+              <div>
+                <div class="choice-main">Large restaurant group</div>
+                <div class="choice-sub">3+ brands or 21+ outlets &mdash; let's talk</div>
+              </div>
+              <div class="choice-tier-tag">Enterprise</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Details -->
+        <div class="step" id="step2">
+          <div class="tier-picked">
+            <div>
+              <div class="picked-label">You picked</div>
+              <div class="picked-tier" id="pickedTierName">—</div>
+            </div>
+            <button type="button" class="change" onclick="goToStep(1)">Change</button>
+          </div>
+
+          <div class="step-title">The basics.</div>
+          <div class="step-sub">Everything we need to set you up. We'll reach out on WhatsApp within a few hours.</div>
+
+          <div class="form-label-group">
+            <label for="f-name">Your name</label>
+            <input type="text" id="f-name" required placeholder="As you'd like us to address you">
+          </div>
+
+          <div class="form-label-group" id="field-business">
+            <label for="f-business" id="label-business">Restaurant name</label>
+            <input type="text" id="f-business" required placeholder="Your flagship brand or restaurant">
+          </div>
+
+          <div class="form-row">
+            <div class="form-label-group">
+              <label for="f-whatsapp">WhatsApp</label>
+              <input type="tel" id="f-whatsapp" required placeholder="+62...">
+            </div>
+            <div class="form-label-group">
+              <label for="f-email">Email</label>
+              <input type="email" id="f-email" required placeholder="you@example.com">
+            </div>
+          </div>
+
+          <!-- Conditional: multi-brand/enterprise show brand+outlet counts -->
+          <div id="multibrand-fields" style="display:none;">
+            <div class="form-row">
+              <div class="form-label-group">
+                <label for="f-brands">Number of brands</label>
+                <select id="f-brands">
+                  <option value="">Select</option>
+                  <option>1</option>
+                  <option>2–3</option>
+                  <option>4–9</option>
+                  <option>10–19</option>
+                  <option>20+</option>
+                </select>
+              </div>
+              <div class="form-label-group">
+                <label for="f-outlets">Number of outlets</label>
+                <select id="f-outlets">
+                  <option value="">Select</option>
+                  <option>1</option>
+                  <option>2–5</option>
+                  <option>6–19</option>
+                  <option>20–49</option>
+                  <option>50+</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-label-group">
+            <label for="f-context" id="label-context">Anything we should know (optional)</label>
+            <textarea id="f-context" placeholder="What you most want xquare to help with"></textarea>
+          </div>
+
+          <div class="step-btns">
+            <button type="button" class="secondary" onclick="goToStep(1)">← Back</button>
+            <button type="button" class="primary" onclick="submitForm()">Submit →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Success -->
+        <div class="step" id="step3">
+          <div class="form-success">
+            <div class="check">✓</div>
+            <h3 id="successHead">Thank you.</h3>
+            <p id="successBody">We'll message you on WhatsApp within a few hours.</p>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">xquare<span class="dot">.</span></div>
+        <div class="foot-tag">Customer engagement platform for Indonesian restaurants.</div>
+      </div>
+      <div>
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="#what-changes">Outcomes</a></li>
+          <li><a href="#intelligence">Customer Intelligence</a></li>
+          <li><a href="#how">Architecture</a></li>
+          <li><a href="#plans">Plans</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Partners</h5>
+        <ul>
+          <li><a href="#signup">Become a vendor</a></li>
+          <li><a href="/kol">KOL program</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#signup">Request a demo</a></li>
+          <li><a href="mailto:hello@xquare.net">hello@xquare.net</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <div>© 2026 xquare. All rights reserved.</div>
+      <div>Privacy · Terms</div>
+    </div>
+  </div>
+</footer>
+
+<a href="#signup" class="sticky-cta" id="stickyCta">Get started →</a>
+
+<script>
+  // Nav/sticky CTA
+  const nav = document.getElementById('topnav');
+  const sticky = document.getElementById('stickyCta');
+  const onScroll = () => {
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+      sticky.classList.add('visible');
+    } else {
+      nav.classList.remove('scrolled');
+      sticky.classList.remove('visible');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal, .reveal-stagger, .outcome').forEach(el => io.observe(el));
+
+  // ========== Customer Intelligence accordion (mobile) ==========
+  document.querySelectorAll('.ci-seg').forEach(seg => {
+    seg.addEventListener('click', () => {
+      if (window.matchMedia('(max-width: 880px)').matches) {
+        seg.classList.toggle('open');
+      }
+    });
+  });
+  if (window.matchMedia('(max-width: 880px)').matches) {
+    const first = document.querySelector('.ci-seg');
+    if (first) first.classList.add('open');
+  }
+
+  // ========== Cascading form logic ==========
+  const tierMeta = {
+    free: {
+      name: 'Free · Get listed',
+      businessLabel: 'Restaurant name',
+      contextLabel: 'Anything we should know (optional)',
+      multibrand: false,
+      success: {
+        head: 'Welcome to xquare.',
+        body: "We'll send you an instant setup link on WhatsApp within a few hours. You'll be listed and taking vouchers by the end of the day."
+      }
+    },
+    pro: {
+      name: 'Pro · Take bookings',
+      businessLabel: 'Restaurant name',
+      contextLabel: 'Tell us about your restaurant (optional)',
+      multibrand: false,
+      success: {
+        head: 'Thank you.',
+        body: "Instant setup coming your way on WhatsApp. Your first month runs at Free-tier transaction rates — Pro pricing kicks in only after the trial."
+      }
+    },
+    business: {
+      name: 'Business · Multi-brand',
+      businessLabel: 'Group or restaurant name',
+      contextLabel: 'Brands, locations, what you most want xquare to solve',
+      multibrand: true,
+      success: {
+        head: 'Thank you.',
+        body: "We'll reach out on WhatsApp within a few hours to schedule a proper onboarding call. Your first month runs at Free-tier transaction rates once we're live."
+      }
+    },
+    enterprise: {
+      name: 'Enterprise · Groups at scale',
+      businessLabel: 'Group or holding company name',
+      contextLabel: 'Your brands, footprint, and what you most want xquare to solve',
+      multibrand: true,
+      success: {
+        head: 'Thank you.',
+        body: "We'll message you on WhatsApp within a few hours to schedule a 30-minute demo on your flagship brand. No commercial pressure — we only discuss pricing if you want to."
+      }
+    }
+  };
+
+  let selectedTier = null;
+
+  function selectTier(tier, label) {
+    selectedTier = tier;
+    const meta = tierMeta[tier];
+    document.getElementById('pickedTierName').textContent = meta.name;
+    document.getElementById('label-business').textContent = meta.businessLabel;
+    document.getElementById('label-context').textContent = meta.contextLabel;
+    document.getElementById('multibrand-fields').style.display = meta.multibrand ? 'block' : 'none';
+    goToStep(2);
+  }
+
+  function goToStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + n).classList.add('active');
+    document.querySelectorAll('.step-progress .dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i < n);
+    });
+  }
+
+  function submitForm() {
+    const name = document.getElementById('f-name').value.trim();
+    const biz = document.getElementById('f-business').value.trim();
+    const wa = document.getElementById('f-whatsapp').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    if (!name || !biz || !wa || !email) {
+      alert('Please fill in name, business, WhatsApp, and email.');
+      return;
+    }
+    const meta = tierMeta[selectedTier];
+    document.getElementById('successHead').textContent = meta.success.head;
+    document.getElementById('successBody').textContent = meta.success.body;
+    goToStep(3);
+  }
+</script>
+
+</body>
+</html>
